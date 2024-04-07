@@ -53,3 +53,12 @@ MCTSNode<P>::has_been_expanded_on(std::unique_ptr<Action> action) const{
         return node.causing_action == action;
     });
 }
+
+template <Player P>
+MCTSNode<P> *
+MCTS<P>::expand_impl(MCTSNode<P> &node, std::unique_ptr<Action> action) & {
+    auto new_state = GameState<!P>{action->board, node.state.n_steps + 1};
+    auto new_node = MCTSNode<!P>(new_state, node, std::move(action));
+    node.children.push_back(new_node);
+    return &node.children.back();
+}

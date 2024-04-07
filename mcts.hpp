@@ -45,9 +45,9 @@ struct MCTSNode {
 
 template <Player P>
 class MCTS {
-    private:
+private:
     MCTSNode<P> *expand_impl(MCTSNode<P> &node, std::unique_ptr<Action> action) &;
-    public:
+public:
     MCTSNode<P> root;
     MCTS(GameState<P> const& state): root(state) {}
     MCTSNode<P> *best_action(MCTSNode<P> &start, size_t n_simulations, double c) &;
